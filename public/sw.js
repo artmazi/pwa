@@ -1,5 +1,9 @@
 self.addEventListener('install', (event) => {
     console.log('SW Installed')
+    cacheFiles(event)
+})
+
+let cacheFiles = (event) => {
     event.waitUntil(
         caches.open('static')
             .then((cache) => {
@@ -16,13 +20,15 @@ self.addEventListener('install', (event) => {
                 ])
             })
     )
-})
+}
 
 self.addEventListener('activate', () => {
     console.log('SW Activated')
+    cacheFiles(event)
 })
 
 self.addEventListener('fetch', (event) => {
+    console.log('Fetching')
     event.respondWith(
         caches.match(event.request)
             .then((res) => {

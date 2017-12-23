@@ -1,16 +1,16 @@
 self.addEventListener('install', (event) => {
     console.log('SW Installed')
+    caches.delete('static').then(() => {
+        console.log('deleteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed')
+    })
     cacheFiles(event)
 })
 
-let cacheFiles = (event) => {
+const cacheFiles = (event) => {
     event.waitUntil(
         caches.open('static')
             .then((cache) => {
-                // cache.add('/')
-                // cache.add('/index.html')
-                // cache.add('/src/js/app.js')
-                return cache.addAll([
+                cache.addAll([
                     '/',
                     '/index.html',
                     '/src/js/app.js',
@@ -22,9 +22,9 @@ let cacheFiles = (event) => {
     )
 }
 
-self.addEventListener('activate', () => {
+
+self.addEventListener('activate', (event) => {
     console.log('SW Activated')
-    cacheFiles(event)
 })
 
 self.addEventListener('fetch', (event) => {

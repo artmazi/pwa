@@ -15,7 +15,7 @@ let cacheFiles = (event) => {
                     '/index.html',
                     '/src/js/app.js',
                     '/src/css/app.css',
-                    '/src/images/pwa.jpg',
+                    '/src/images/pwa.webp',
                     'https://fonts.googleapis.com/css?family=Raleway:400,700'
                 ])
             })

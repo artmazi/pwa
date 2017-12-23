@@ -7,7 +7,22 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
     .then(() => {
         console.log('SW registered')
+        showNotification();
     })
+    function showNotification() {
+        Notification.requestPermission(function (result) {
+            if (result === 'granted') {
+                navigator.serviceWorker.ready.then(function (registration) {
+                    registration.showNotification('Wohhoo', {
+                        body: 'This is a simple notification',
+                        icon: '../images/touch/icons/app-icon-96x96.png',
+                        vibrate: [200, 100, 200, 100, 200, 100, 200],
+                        tag: 'vib vib vib'
+                    });
+                });
+            }
+        });
+    }
 }
 
 pwaCard.addEventListener('click', (e) => {
